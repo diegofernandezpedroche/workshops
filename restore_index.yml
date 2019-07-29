@@ -1,0 +1,26 @@
+---
+- name: Install and start Apache HTTPD
+  hosts: all
+  vars:
+    index_message: "This is your new apache server"
+    index_image: ""
+
+  tasks:
+    - name: httpd package is present
+      yum:
+        name: httpd
+        state: present
+      become: true
+
+    - name: Original index.html.orig is present
+      copy:
+        src: /var/www/html/index.html.orig
+        dest: /var/www/html/index.html
+      become: true
+
+    - name: httpd is started
+      service:
+        name: httpd
+        state: restarted
+        enabled: true
+become: true
