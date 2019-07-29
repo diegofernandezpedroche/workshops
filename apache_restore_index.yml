@@ -17,6 +17,7 @@
         src: /var/www/html/index.html.orig
         dest: /var/www/html/index.html
         force: true
+        remote_src: yes
       become: true
 
     - name: httpd is started
